@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}
+Tasky - Update
+{% endblock title %}
+
+{% block head %}
+    <h1 class="mb-3 text-center">Update</h1>
+{% endblock head %}
+
+{% block content %}
+<div class="container">
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Task</th>
+            <th scope="col">Added</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                <th scope="row">{{ task.id }}</th>
+                <td>{{ task.content }}</td>
+                <td>{{ task.date_created.date() }}</td>
+                <td><a class="btn disabled btn-sm btn-danger" href="#">Delete</a>
+                    <a class="btn btn-sm disabled btn-warning" href="#">Update</a>
+                </td>
+                </tr>            
+            {% endfor %}
+          
+        </tbody>
+      </table>
+
+      <form action="/update/{{ task.id }}" method="POST">        
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="New task" aria-label="new-task" aria-describedby="basic-addon2" name="content" id="content" value="{{ task.content }}">
+            <div class="input-group-append">                
+                <input class="btn btn-block btn-warning" type="submit" value="Update Task">
+          </div>
+        </div>
+      </form>
+
+    
+</div>
+{% endblock content %}
+
